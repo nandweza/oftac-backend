@@ -28,6 +28,6 @@ export const createPost = (values: Record<string, any>) => new PostModel(values)
                             .save().then((post) => post.toJSON());
 
 export const updatePost = (id: string, values: Record<string, any>) => 
-                            PostModel.findByIdAndUpdate({ _id: id, values });
+                            PostModel.findByIdAndUpdate(id, values);
 
-export const deletePostById = (id: string) => PostModel.findByIdAndDelete({ _id: id });
+export const deletePostById = (id: string) => PostModel.findByIdAndDelete(id);

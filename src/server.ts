@@ -1,7 +1,8 @@
 import app from './index';
 
-const port = process.env.PORT || 5000;
+const port: number = 5000;
+const hostname: string = 'http://127.0.0.1';
 
 app.listen(port, () => {
-    console.log('Server running on http://127.0.0.1:5000');
+    console.log(`Server running on ${hostname}:${port}`);
 });

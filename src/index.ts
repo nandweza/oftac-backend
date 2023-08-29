@@ -4,22 +4,30 @@ const app = express();
 
 import cors from 'cors';
 import mongoose from 'mongoose';
-import router from './router';
+import authRoutes from './router/authRoutes';
+import postRoutes from './router/postRoutes';
+import projectRoutes from './router/projectRoutes';
+import contactRoutes from './router/contactRoutes';
 
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
     res.locals.path = req.path;
     next();
 });
 
+app.use('/uploads', express.static('uploads'));
+
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost:27017/oftacDB");
 mongoose.connection.on('error', (error: Error) => console.log(error));
 
-app.use('/', router());
+app.use('/api/auth', authRoutes);
+app.use('/api/post', postRoutes);
+app.use('/api/project', projectRoutes);
+app.use('/api/contact', contactRoutes);
 
 export default app;
