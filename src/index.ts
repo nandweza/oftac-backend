@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 
 const app = express();
@@ -10,6 +11,7 @@ import projectRoutes from './routes/projectRoutes';
 // import contactRoutes from './routes/contactRoutes';
 import userRoutes from './routes/userRoutes';
 
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
@@ -22,9 +24,14 @@ app.use((req, res, next) => {
 
 app.use('/uploads', express.static('uploads'));
 
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost:27017/oftacDB");
-mongoose.connection.on('error', (error: Error) => console.log(error));
+// mongoose.Promise = Promise;
+// mongoose.connect("mongodb://localhost:27017/oftacDB");
+// mongoose.connection.on('error', (error: Error) => console.log(error));
+
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("DB Connected Successfully"))
+    .catch((err) => console.log(err));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
