@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
+    "build": "tsc -p .",
     "test": "mocha --require ts-node/register \"tests/**/*/.test.ts\""
   },
   "author": "Nandweza Allan",
