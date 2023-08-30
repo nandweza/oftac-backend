@@ -56,3 +56,29 @@ export const login = async (req: express.Request, res: express.Response) => {
         res.status(500).json({ message: 'An error occured' });
     }
 }
+
+export const resetPassword = async (req: express.Request, res: express.Response) => {
+    try {
+
+        const {username,  newPassword } = req.body;
+
+        const user = await getUserByUsername(username);
+
+        if (!user) {
+            return res.status(401).json({ message: 'User not found' });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        user.password = hashedPassword;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password reset success' });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'An error occured' });
+    }
+}

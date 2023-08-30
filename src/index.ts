@@ -4,10 +4,11 @@ const app = express();
 
 import cors from 'cors';
 import mongoose from 'mongoose';
-import authRoutes from './router/authRoutes';
-import postRoutes from './router/postRoutes';
-import projectRoutes from './router/projectRoutes';
-import contactRoutes from './router/contactRoutes';
+import authRoutes from './routes/authRoutes';
+import postRoutes from './routes/postRoutes';
+import projectRoutes from './routes/projectRoutes';
+// import contactRoutes from './routes/contactRoutes';
+import userRoutes from './routes/userRoutes';
 
 
 app.use(cors());
@@ -28,6 +29,7 @@ mongoose.connection.on('error', (error: Error) => console.log(error));
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/project', projectRoutes);
-app.use('/api/contact', contactRoutes);
+// app.use('/api/contact', contactRoutes);
+app.use('/api/user', userRoutes);
 
 export default app;

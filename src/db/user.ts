@@ -22,3 +22,10 @@ export const getUserByUsername = (username: string) => UserModel.findOne({ usern
 
 export const createUser = (values: Record<string, any>) => new UserModel(values)
                             .save().then((user) => user.toJSON());
+
+export const updateUser = (id: string, values: Record<string, any>) => 
+                            UserModel.findByIdAndUpdate(id, values);
+
+export const resetPasswordById = (id: string, values: Record<string, any>) => 
+                                    UserModel.findByIdAndUpdate(id, values);
+
