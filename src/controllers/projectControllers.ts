@@ -13,6 +13,7 @@ export const newProject = async (req: express.Request, res: express.Response) =>
     try {
         upload(req, res, async (err) => {
             if(err) {
+                console.error('File upload error:', err);
                 return res.status(500).json({ message: 'An error occured' });
             }
         });
@@ -70,7 +71,7 @@ export const updatedProject = async (req: express.Request, res: express.Response
 
         const id: string = req.params.id;
         const { title, content } = req.body;
-        const img = req.file?.fieldname;
+        const img = req.file?.filename;
 
         await updateProject(id, {title, content, img});
 

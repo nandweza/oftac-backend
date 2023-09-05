@@ -1,5 +1,4 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
 import { getUserByUsername, getUsers, updateUser, resetPasswordById } from '../db/user';
 
 export const getUser = async (req: express.Request, res: express.Response) => {
