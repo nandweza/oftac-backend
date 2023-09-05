@@ -7,6 +7,7 @@ const newProject = async (req, res) => {
     try {
         (0, uploadMiddleware_1.upload)(req, res, async (err) => {
             if (err) {
+                console.error('File upload error:', err);
                 return res.status(500).json({ message: 'An error occured' });
             }
         });
@@ -60,7 +61,7 @@ const updatedProject = async (req, res) => {
         });
         const id = req.params.id;
         const { title, content } = req.body;
-        const img = req.file?.fieldname;
+        const img = req.file?.filename;
         await (0, project_1.updateProject)(id, { title, content, img });
         res.status(200).json({ message: 'post updated!' });
     }
