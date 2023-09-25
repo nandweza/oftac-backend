@@ -12,14 +12,15 @@ const newProject = async (req, res) => {
             }
         });
         const { title, content } = req.body;
-        const img = req.file?.filename;
+        const file = req.file;
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
+        const filePath = file.path;
         const project = await (0, project_1.createProject)({
             title,
             content,
-            img
+            img: filePath
         });
         res.status(201).json(project);
     }

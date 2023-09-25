@@ -1,7 +1,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import path from 'path';
 
 const app = express();
+
+// Serve static files from the "uploads" directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+dotenv.config();
 
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -11,7 +17,6 @@ import projectRoutes from './routes/projectRoutes';
 import contactRoutes from './routes/contactRoutes';
 import userRoutes from './routes/userRoutes';
 
-dotenv.config();
 
 app.use(cors());
 app.use(express.json());
@@ -22,7 +27,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URL)

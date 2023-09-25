@@ -19,16 +19,18 @@ export const newProject = async (req: express.Request, res: express.Response) =>
         });
 
         const { title, content } = req.body;
-        const img = req.file?.filename;
+        const file = req.file;
 
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
 
+        const filePath = file.path;
+
         const project = await createProject({
             title,
             content,
-            img
+            img: filePath
         });
 
         res.status(201).json(project);
