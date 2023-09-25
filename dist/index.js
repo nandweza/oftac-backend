@@ -11,7 +11,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const postRoutes_1 = __importDefault(require("./routes/postRoutes"));
 const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
-// import contactRoutes from './routes/contactRoutes';
+const contactRoutes_1 = __importDefault(require("./routes/contactRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 dotenv_1.default.config();
 app.use((0, cors_1.default)());
@@ -22,9 +22,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/uploads', express_1.default.static('uploads'));
-// mongoose.Promise = Promise;
-// mongoose.connect("mongodb://localhost:27017/oftacDB");
-// mongoose.connection.on('error', (error: Error) => console.log(error));
 mongoose_1.default.set('strictQuery', true);
 mongoose_1.default.connect(process.env.MONGO_URL)
     .then(() => console.log("DB Connected Successfully"))
@@ -32,7 +29,7 @@ mongoose_1.default.connect(process.env.MONGO_URL)
 app.use('/api/auth', authRoutes_1.default);
 app.use('/api/post', postRoutes_1.default);
 app.use('/api/project', projectRoutes_1.default);
-// app.use('/api/contact', contactRoutes);
+app.use('/api/contact', contactRoutes_1.default);
 app.use('/api/user', userRoutes_1.default);
 exports.default = app;
 //# sourceMappingURL=index.js.map

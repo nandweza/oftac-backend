@@ -1,10 +1,13 @@
 "use strict";
-// import express from 'express';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { submitMessage } from '../controllers/contactControllers';
-// const router = express.Router();
-// router
-//     .route('/')
-//     .post(submitMessage);
-// export default router;
+const express_1 = __importDefault(require("express"));
+const contactControllers_1 = require("../controllers/contactControllers");
+const router = express_1.default.Router();
+router
+    .route('/')
+    .post(contactControllers_1.submitMessage);
+exports.default = router;
 //# sourceMappingURL=contactRoutes.js.map
