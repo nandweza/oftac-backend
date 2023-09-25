@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes';
 import postRoutes from './routes/postRoutes';
 import projectRoutes from './routes/projectRoutes';
-// import contactRoutes from './routes/contactRoutes';
+import contactRoutes from './routes/contactRoutes';
 import userRoutes from './routes/userRoutes';
 
 dotenv.config();
@@ -24,10 +24,6 @@ app.use((req, res, next) => {
 
 app.use('/uploads', express.static('uploads'));
 
-// mongoose.Promise = Promise;
-// mongoose.connect("mongodb://localhost:27017/oftacDB");
-// mongoose.connection.on('error', (error: Error) => console.log(error));
-
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("DB Connected Successfully"))
@@ -36,7 +32,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/project', projectRoutes);
-// app.use('/api/contact', contactRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/api/user', userRoutes);
 
 export default app;

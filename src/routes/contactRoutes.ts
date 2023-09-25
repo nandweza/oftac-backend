@@ -1,12 +1,12 @@
-// import express from 'express';
+import express from 'express';
 
-// import { submitMessage } from '../controllers/contactControllers';
+import { submitMessage } from '../controllers/contactControllers';
 
-// const router = express.Router();
+const router = express.Router();
 
-// router
-//     .route('/')
-//     .post(submitMessage);
+router
+    .route('/')
+    .post(submitMessage);
 
 
-// export default router;
+export default router;
