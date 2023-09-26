@@ -1,30 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProject = exports.updatedProject = exports.getProject = exports.getAllProjects = exports.newProject = void 0;
+// import path from 'path';
 const project_1 = require("../db/project");
 const uploadMiddleware_1 = require("../middleware/uploadMiddleware");
 const newProject = async (req, res) => {
     try {
-        (0, uploadMiddleware_1.upload)(req, res, async (err) => {
-            if (err) {
-                console.error('File upload error:', err);
-                return res.status(500).json({ message: 'An error occured' });
-            }
-        });
+        // upload(req, res, async (err) => {
+        //     if(err) {
+        //         console.error('File upload error:', err);
+        //         return res.status(500).json({ message: 'An error occured' });
+        //     }
+        // });
         const { title, content } = req.body;
-        const file = req.file;
-        if (!file) {
-            return res.status(400).json({ message: 'No file uploaded' });
-        }
+        const img = req.file.filename;
+        // if (!file) {
+        //     return res.status(400).json({ message: 'No file uploaded' });
+        // }
+        // if (req.file) {
+        //     const img = req.file.path;
+        // }
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
-        const filePath = file.path;
-        const project = await (0, project_1.createProject)({
+        // const filePath = file.path;
+        const project = new project_1.ProjectModel({
             title,
             content,
-            img: filePath
+            img
         });
+        project.save();
         res.status(201).json(project);
     }
     catch (error) {

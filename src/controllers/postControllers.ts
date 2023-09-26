@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { 
-            createPost, 
+            PostModel, 
             getPosts, 
             getPostById, 
             updatePost, 
@@ -11,24 +11,26 @@ import { upload } from '../middleware/uploadMiddleware';
 
 export const newPost = async (req: express.Request, res: express.Response) => {
     try {
-        upload(req, res, async (err) => {
-            if(err) {
-                return res.status(500).json({ message: 'An error occured' });
-            }
-        });
+        // upload(req, res, async (err) => {
+        //     if(err) {
+        //         return res.status(500).json({ message: 'An error occured' });
+        //     }
+        // });
 
         const { title, content } = req.body;
-        const img = req.file?.filename;
+        const img = req.file.filename;
 
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
 
-        const posts = await createPost({
+        const posts = new PostModel({
             title,
             content,
             img
         });
+
+        posts.save();
 
         res.status(201).json(posts);
     } catch (error) {

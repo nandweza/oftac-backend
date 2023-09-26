@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProjectById = exports.updateProject = exports.createProject = exports.getProjectById = exports.getProjects = exports.ProjectModel = void 0;
+exports.deleteProjectById = exports.updateProject = exports.getProjectById = exports.getProjects = exports.ProjectModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const ProjectSchema = new mongoose_1.default.Schema({
     title: {
@@ -24,9 +24,8 @@ const getProjects = () => exports.ProjectModel.find();
 exports.getProjects = getProjects;
 const getProjectById = (id) => exports.ProjectModel.findById(id);
 exports.getProjectById = getProjectById;
-const createProject = (values) => new exports.ProjectModel(values)
-    .save().then((project) => project.toJSON());
-exports.createProject = createProject;
+// export const createProject = (values: Record<string, any>) => new ProjectModel(values)
+//                                 .save().then((project) => project.toJSON());
 const updateProject = (id, values) => exports.ProjectModel.findByIdAndUpdate(id, values);
 exports.updateProject = updateProject;
 const deleteProjectById = (id) => exports.ProjectModel.findByIdAndDelete(id);

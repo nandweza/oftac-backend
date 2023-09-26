@@ -1,8 +1,8 @@
 import express from 'express';
-import path from 'path';
+// import path from 'path';
 
 import {
-            createProject,
+            ProjectModel,
             getProjects,
             getProjectById,
             updateProject,
@@ -12,31 +12,36 @@ import { upload } from '../middleware/uploadMiddleware';
 
 export const newProject = async (req: express.Request, res: express.Response) => {
     try {
-        upload(req, res, async (err) => {
-            if(err) {
-                console.error('File upload error:', err);
-                return res.status(500).json({ message: 'An error occured' });
-            }
-        });
+        // upload(req, res, async (err) => {
+        //     if(err) {
+        //         console.error('File upload error:', err);
+        //         return res.status(500).json({ message: 'An error occured' });
+        //     }
+        // });
 
         const { title, content } = req.body;
-        const file = req.file;
+        const img = req.file.filename;
 
-        if (!file) {
-            return res.status(400).json({ message: 'No file uploaded' });
-        }
+        // if (!file) {
+        //     return res.status(400).json({ message: 'No file uploaded' });
+        // }
+        // if (req.file) {
+        //     const img = req.file.path;
+        // }
 
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
 
-        const filePath = file.path;
+        // const filePath = file.path;
 
-        const project = await createProject({
+        const project = new ProjectModel({
             title,
             content,
-            img: filePath
+            img
         });
+
+        project.save()
 
         res.status(201).json(project);
     } catch (error) {

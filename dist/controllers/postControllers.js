@@ -5,21 +5,22 @@ const post_1 = require("../db/post");
 const uploadMiddleware_1 = require("../middleware/uploadMiddleware");
 const newPost = async (req, res) => {
     try {
-        (0, uploadMiddleware_1.upload)(req, res, async (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'An error occured' });
-            }
-        });
+        // upload(req, res, async (err) => {
+        //     if(err) {
+        //         return res.status(500).json({ message: 'An error occured' });
+        //     }
+        // });
         const { title, content } = req.body;
-        const img = req.file?.filename;
+        const img = req.file.filename;
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }
-        const posts = await (0, post_1.createPost)({
+        const posts = new post_1.PostModel({
             title,
             content,
             img
         });
+        posts.save();
         res.status(201).json(posts);
     }
     catch (error) {

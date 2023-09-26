@@ -5,10 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const postControllers_1 = require("../controllers/postControllers");
+const uploadMiddleware_1 = require("../middleware/uploadMiddleware");
 const router = express_1.default.Router();
 router
     .route('/')
-    .post(postControllers_1.newPost)
+    .post(uploadMiddleware_1.upload, postControllers_1.newPost)
     .get(postControllers_1.getAllPosts);
 router
     .route('/:id')

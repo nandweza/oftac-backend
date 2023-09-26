@@ -1,4 +1,6 @@
 import express from 'express'
+import path from 'path';
+import { upload } from '../middleware/uploadMiddleware';
 
 import { 
         newProject, 
@@ -12,7 +14,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .post(newProject)
+    .post(upload, newProject)
     .get(getAllProjects);
 
 router

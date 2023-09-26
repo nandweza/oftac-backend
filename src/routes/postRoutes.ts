@@ -1,12 +1,13 @@
 import express from 'express'
 
 import { getAllPosts, newPost, getPost, updatedPost, deletePost } from '../controllers/postControllers';
+import { upload } from '../middleware/uploadMiddleware';
 
 const router = express.Router();
 
 router
     .route('/')
-    .post(newPost)
+    .post(upload, newPost)
     .get(getAllPosts);
 
 router
