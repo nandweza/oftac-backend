@@ -13,6 +13,9 @@ const newProject = async (req, res) => {
         });
         const { title, content } = req.body;
         const file = req.file;
+        if (!file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
         }

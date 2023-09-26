@@ -8,12 +8,12 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const ProjectSchema = new mongoose_1.default.Schema({
     title: {
         type: String,
-        // required: true,
-        // unique: true,
+        required: true,
+        unique: true,
     },
     content: {
         type: String,
-        // required: true
+        required: true
     },
     img: {
         type: String,

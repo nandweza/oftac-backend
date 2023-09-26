@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 
 import {
             createProject,
@@ -20,6 +21,10 @@ export const newProject = async (req: express.Request, res: express.Response) =>
 
         const { title, content } = req.body;
         const file = req.file;
+
+        if (!file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
 
         if (!title || !content) {
             return res.status(400).json({ message: 'Missing title or content' });
