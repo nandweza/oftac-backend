@@ -24,9 +24,11 @@ const cspConfig = {
         imgSrc: ["'self'", "https://oftac-backend.onrender.com"],
     },
 };
+// Define a CSP policy that allows images from a specific domain
+const cspValue = "default-src 'self'; img-src 'self' https://oftac-backend.onrender.com";
 // Set CSP headers in your Express app
 app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', getCSPString(cspConfig));
+    res.setHeader('Content-Security-Policy', cspValue);
     next();
 });
 app.use((0, cors_1.default)());
