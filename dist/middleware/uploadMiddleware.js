@@ -17,8 +17,4 @@ const storage = multer_1.default.diskStorage({
 });
 const upload = (0, multer_1.default)({ storage }).single('img');
 exports.upload = upload;
-// import multer from 'multer';
-// const storage = multer.memoryStorage(); // Store the file in memory, not on disk
-// const upload = multer({ storage }).single('img');
-// export { upload };
 //# sourceMappingURL=uploadMiddleware.js.map

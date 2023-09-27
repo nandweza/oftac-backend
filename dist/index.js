@@ -17,20 +17,6 @@ const postRoutes_1 = __importDefault(require("./routes/postRoutes"));
 const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
 const contactRoutes_1 = __importDefault(require("./routes/contactRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
-// Define a CSP policy that allows images from a specific domain
-const cspConfig = {
-    directives: {
-        defaultSrc: ["'self'"],
-        imgSrc: ["'self'", "https://oftac-backend.onrender.com"],
-    },
-};
-// Define a CSP policy that allows images from a specific domain
-const cspValue = "default-src 'self'; img-src 'self' https://oftac-backend.onrender.com";
-// Set CSP headers in your Express app
-app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', cspValue);
-    next();
-});
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
@@ -49,7 +35,4 @@ app.use('/api/project', projectRoutes_1.default);
 app.use('/api/contact', contactRoutes_1.default);
 app.use('/api/user', userRoutes_1.default);
 exports.default = app;
-function getCSPString(cspConfig) {
-    throw new Error('Function not implemented.');
-}
 //# sourceMappingURL=index.js.map

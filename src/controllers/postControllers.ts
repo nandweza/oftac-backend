@@ -2,7 +2,7 @@ import express from 'express';
 
 import { 
             PostModel, 
-            // getPosts, 
+            getPosts, 
             getPostById, 
             updatePost, 
             deletePostById 
@@ -41,7 +41,7 @@ export const newPost = async (req: express.Request, res: express.Response) => {
 
 export const getAllPosts = async (req: express.Request, res: express.Response) => {
     try {
-        const posts = await PostModel.find();
+        const posts = await getPosts();
 
         res.status(200).json({ posts });
     } catch (error) {

@@ -26,7 +26,7 @@ const PostSchema = new mongoose.Schema(
 
 export const PostModel = mongoose.model<IPost>('Post', PostSchema);
 
-// export const getPosts = () => PostModel.find();
+export const getPosts = () => PostModel.find();
 
 export const getPostById = (id: string) => PostModel.findById(id);
 
